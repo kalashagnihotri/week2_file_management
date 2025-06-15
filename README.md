@@ -13,6 +13,7 @@ This project covers:
 - Modular code.
 - Express server with Week 1 demo routes.
 - NPM scripts for convenience.
+- **Homepage with navigation buttons and forms for file management.**
 
 ## Usage
 
@@ -25,12 +26,14 @@ npm install
 ### 2. Run the Express server
 
 ```bash
-npm start
+npm run dev
 ```
 
 Visit:  
-- `/` for homepage  
+- `/` for homepage (displays README and navigation buttons)
 - `/about` for Week 1 summary  
+- `/data` for JSON data  
+- `/greet?name=YourName` for a greeting  
 - `/files` for listing files (GET), creating files (POST), reading (`/files/:filename`), and deleting files
 
 ### 3. Use the CLI tool
@@ -76,3 +79,12 @@ node-file-manager/
 ├── .env
 └── README.md
 ```
+
+## Homepage
+
+The homepage (`/`) displays:
+- Navigation buttons for `/about`, `/data`, `/greet?name=YourName`, `/files`, and `/files/example.txt`.
+- A form to create a file (POST to `/files`).
+- A form to delete a file (DELETE to `/files/:filename`).
+
+This allows you to interact with all endpoints directly from the homepage.
