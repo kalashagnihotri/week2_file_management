@@ -15,7 +15,7 @@ It demonstrates the use of Node.js core modules, NPM fundamentals, REST APIs, an
 ## ✨ Features
 
 - **📁 File Management:** Create, list, read, edit, and delete text files via web UI and CLI.
-- **💾 Persistent Storage:** All files are saved in the server's `files/` directory.
+- **💾 Persistent Storage:** Files created/edited via the web UI are stored on the server; files managed via CLI are stored in the `/files` directory.
 - **📝 Custom Logging:** Uses an EventEmitter-based logger for file operations.
 - **🔌 Core Modules:** Utilizes `fs`, `path`, `events`, and `util`.
 - **🌐 Express Web UI:** Clean HTML interface for file operations in your browser.
@@ -31,7 +31,7 @@ It demonstrates the use of Node.js core modules, NPM fundamentals, REST APIs, an
 
 ```
 week2_file_management/
-├── files/               # Directory where all managed files are stored
+├── files/               # Directory for files managed via CLI
 ├── src/
 │   ├── app.js           # Express server and web routes
 │   ├── cli.js           # Command-line interface for file management
@@ -66,7 +66,8 @@ week2_file_management/
 
 3. **Files Storage**
 
-    All files are stored in the `files/` directory (created automatically if it doesn't exist).
+    - **CLI:** Files you create, edit, or delete with the CLI are stored in the `/files` directory in the project root.
+    - **Web UI:** Files managed from the web UI are stored on the server (in the same `/files` directory, accessible via web endpoints).
 
 ---
 
@@ -102,7 +103,7 @@ week2_file_management/
 | `/files/delete/:filename`   | Delete a file (DELETE request)                |
 
 > **Note:**  
-> The UI displays and manages files stored only in the server’s local `files/` directory.
+> The UI displays and manages files stored only in the server’s local `/files` directory.
 
 ---
 
@@ -118,7 +119,7 @@ week2_file_management/
 
 | Command                        | Description                                   |
 |--------------------------------|-----------------------------------------------|
-| `list`                         | List all files in `files/`                    |
+| `list`                         | List all files in `/files/`                   |
 | `create <filename> [content]`  | Create a new file with optional content       |
 | `read <filename>`              | Display content of a file                     |
 | `delete <filename>`            | Delete a specific file                        |
@@ -155,7 +156,11 @@ node src/cli.js delete hello.txt
   Express routes serve navigation, file management, and HTML forms.
 
 - **Files Directory:**  
-  All files are stored as plain text in the `files/` directory.
+  All files are stored as plain text in the `/files` directory.
+
+- **Storage Behavior:**  
+  - Files created/edited from the CLI are stored in `/files` and can be accessed through the web UI.
+  - Files created/edited from the web UI are stored on the server (also in `/files`) and are visible to both the web UI and CLI.
 
 ---
 
