@@ -1,90 +1,180 @@
-# Node.js File Management Tool & Express Web App
+# 🌟 Node.js File Management Tool & Express Web App
 
-## Overview
+---
 
-This project covers:
-- Week 1: Node.js basics, modules, Express server, routing, package.json, and NPM scripts.
-- Week 2: Node.js core modules (`fs`, `path`, `http`, `events`, `util`), NPM packages and scripts.
+## 📚 Overview
 
-## Features
+This project is a **Node.js File Management Tool** and **Web Application** built with Express.  
+It demonstrates the use of Node.js core modules, NPM fundamentals, REST APIs, and a CLI for practical file operations.
 
-- List, create, read, and delete files using both CLI and REST API.
-- Logging with custom event emitter.
-- Modular code.
-- Express server with Week 1 demo routes.
-- NPM scripts for convenience.
-- **Homepage with navigation buttons and forms for file management.**
+- **Week 1:** Node.js basics, modules, Express server, routing, and NPM scripts.
+- **Week 2:** Core modules (`fs`, `path`, `events`, `util`, `http`), file management, and package management.
 
-## Usage
+---
 
-### 1. Install dependencies
+## ✨ Features
 
-```bash
-npm install
+- **📁 File Management:** Create, list, read, edit, and delete text files via web UI and CLI.
+- **💾 Persistent Storage:** All files are saved in the server's `files/` directory.
+- **📝 Custom Logging:** Uses an EventEmitter-based logger for file operations.
+- **🔌 Core Modules:** Utilizes `fs`, `path`, `events`, and `util`.
+- **🌐 Express Web UI:** Clean HTML interface for file operations in your browser.
+- **🛠️ REST Endpoints:** API for file CRUD operations.
+- **💻 CLI Tool:** Manage files directly from your terminal.
+- **⚙️ NPM Scripts:** Start, develop, and manage with simple commands.
+- **🔒 Environment Variables:** Configure the app with `.env` (e.g., server port).
+- **🚫 404 Handling:** Custom error page for unknown routes.
+
+---
+
+## 📂 Directory Structure
+
+```
+week2_file_management/
+├── files/               # Directory where all managed files are stored
+├── src/
+│   ├── app.js           # Express server and web routes
+│   ├── cli.js           # Command-line interface for file management
+│   ├── fileManager.js   # File management logic using core modules
+│   └── logger.js        # Custom logger using events
+├── .env                 # Environment variables
+├── .gitignore           # Files/directories to be ignored by git
+├── package.json         # Project metadata and scripts
+├── package-lock.json    # NPM lock file
+└── README.md            # This documentation
 ```
 
-### 2. Run the Express server
+---
 
-```bash
-npm run dev
-```
+## ⚡️ Setup
 
-Visit:  
-- `/` for homepage (displays README and navigation buttons)
-- `/about` for Week 1 summary  
-- `/data` for JSON data  
-- `/greet?name=YourName` for a greeting  
-- `/files` for listing files (GET), creating files (POST), reading (`/files/:filename`), and deleting files
+1. **Install Dependencies**
 
-### 3. Use the CLI tool
+    ```bash
+    npm install
+    ```
 
-```bash
-npm run cli:list
-npm run cli:create
-npm run cli:read
-npm run cli:delete
-```
-Or:
+2. **Environment Setup**
+
+    Create a `.env` file (optional):
+
+    ```
+    PORT=3000
+    ```
+
+    If omitted, the server defaults to port 3000.
+
+3. **Files Storage**
+
+    All files are stored in the `files/` directory (created automatically if it doesn't exist).
+
+---
+
+## 🚀 Usage
+
+### 🌐 Web Interface (Express)
+
+- **Start the server:**
+
+    ```bash
+    npm start
+    ```
+    or for development:
+    ```bash
+    npm run dev
+    ```
+
+- **Open in your browser:**  
+  [http://localhost:3000/](http://localhost:3000/)
+
+#### Main Routes
+
+| Route                       | Description                                   |
+|-----------------------------|-----------------------------------------------|
+| `/`                         | Homepage with navigation and features         |
+| `/about`                    | About the project and context                 |
+| `/data`                     | Project metadata in JSON                      |
+| `/greet?name=YourName`      | Personalized greeting                         |
+| `/files`                    | List all files, with read/edit/delete options |
+| `/files/read/:filename`     | View content of a specific file               |
+| `/files/create`             | Form to create a new file                     |
+| `/files/edit/:filename`     | Edit an existing file                         |
+| `/files/delete/:filename`   | Delete a file (DELETE request)                |
+
+> **Note:**  
+> The UI displays and manages files stored only in the server’s local `files/` directory.
+
+---
+
+### 💻 Command-Line Interface (CLI)
+
+- **Run commands from the terminal:**
+
+    ```bash
+    node src/cli.js <command> [arguments]
+    ```
+
+#### CLI Commands
+
+| Command                        | Description                                   |
+|--------------------------------|-----------------------------------------------|
+| `list`                         | List all files in `files/`                    |
+| `create <filename> [content]`  | Create a new file with optional content       |
+| `read <filename>`              | Display content of a file                     |
+| `delete <filename>`            | Delete a specific file                        |
+
+**Examples:**
+
 ```bash
 node src/cli.js list
-node src/cli.js create test.txt "Hello world"
-node src/cli.js read test.txt
-node src/cli.js delete test.txt
+node src/cli.js create hello.txt "Sample content"
+node src/cli.js read hello.txt
+node src/cli.js delete hello.txt
 ```
 
-### 4. NPM Scripts
+---
 
-- `start`: Start Express app
-- `dev`: Start with nodemon
-- `cli`: Run CLI tool with arguments
-- `cli:list`, `cli:create`, `cli:read`, `cli:delete`: Examples
+## 🛠️ NPM Scripts
 
-### 5. Add a `.env` file
+| Script   | Description                        |
+|----------|------------------------------------|
+| `start`  | Launch the Express web server      |
+| `dev`    | Launch with nodemon (dev mode)     |
 
-```
-PORT=3000
-```
+---
 
-## Directory Structure
+## 🏗️ Implementation Details
 
-```
-node-file-manager/
-├── src/
-│   ├── cli.js
-│   ├── fileManager.js
-│   ├── app.js
-│   └── logger.js
-├── files/          # (create this for storing files)
-├── package.json
-├── .env
-└── README.md
-```
+- **File Management:**  
+  All logic is in `src/fileManager.js`, using the Node.js core modules.
 
-## Homepage
+- **Logging:**  
+  Operations are logged via a custom EventEmitter (`src/logger.js`).
 
-The homepage (`/`) displays:
-- Navigation buttons for `/about`, `/data`, `/greet?name=YourName`, `/files`, and `/files/example.txt`.
-- A form to create a file (POST to `/files`).
-- A form to delete a file (DELETE to `/files/:filename`).
+- **Web UI:**  
+  Express routes serve navigation, file management, and HTML forms.
 
-This allows you to interact with all endpoints directly from the homepage.
+- **Files Directory:**  
+  All files are stored as plain text in the `files/` directory.
+
+---
+
+## ❌ 404 and Error Handling
+
+- Unknown routes return a custom 404 HTML page.
+- File operations handle missing files and invalid input gracefully.
+
+---
+
+## 📜 .gitignore
+
+The `.gitignore` file is set to ignore:
+
+- `node_modules/`
+- `.env`
+- `logs/`, `*.log`
+- `coverage/`, `*.lcov`
+- `.DS_Store`, `Thumbs.db`
+- `files/` (local files managed by the app)
+
+---
